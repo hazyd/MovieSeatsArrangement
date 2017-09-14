@@ -31,11 +31,14 @@ public class SeatsAssigning {
             list.add(sb.toString());
             this.availableSeats.put(i, list);
         }
+        this.curRow = this.row / 2 - 1;
     }
 
     public void addSeats(int n, StringBuilder res) {
-        if (n > checkAllAvailableSeats()) {
-            System.out.print("Error! There's no plenty of seats!");
+        if (n <= 0) {
+            res.append("Invalid order! ");
+        } else if (n > checkAllAvailableSeats()) {
+            res.append("Error! There's no plenty of seats! ");
         } else {
             boolean isComplete = false;
             if (n > this.col) {
@@ -45,14 +48,14 @@ public class SeatsAssigning {
             } else {
                 int count = 0;
                 while (count < (this.row / 2)) {
-                    this.curRow = this.curRow % (this.row / 2);
+                    this.curRow = this.curRow < 0? this.row / 2 - 1: this.curRow;
                     int startPlace = checkMaxGapStartPos(n);
                     if (startPlace == -1) {
-                        this.curRow++;
+                        this.curRow--;
                         count++;
                     } else {
                         assignSeats(startPlace, n, res);
-                        this.curRow++;
+                        this.curRow--;
                         isComplete = true;
                         break;
                     }
@@ -81,7 +84,7 @@ public class SeatsAssigning {
                                     StringBuilder sb = new StringBuilder();
                                     sb.append(this.mapChar[i]);
                                     sb.append(j + 1);
-                                    sb.append(" ");
+                                    sb.append(",");
                                     res.append(sb.toString());
                                     assignedNum++;
                                 }
@@ -121,7 +124,7 @@ public class SeatsAssigning {
             StringBuilder sb = new StringBuilder();
             sb.append(this.mapChar[this.curRow]);
             sb.append(startPos + i);
-            sb.append(" ");
+            sb.append(",");
             res.append(sb.toString());
         }
     }
@@ -159,8 +162,9 @@ public class SeatsAssigning {
     public void printSeats() {
         System.out.println();
         for (int i = 0; i < this.row; i++) {
+            System.out.print(this.mapChar[i] + ": ");
             for (int j = 0; j < this.col; j++) {
-                System.out.print(this.seats[i][j] + " ");
+                System.out.print((this.seats[i][j] == 0? "O" : "X")+ " ");
             }
             System.out.println();
         }

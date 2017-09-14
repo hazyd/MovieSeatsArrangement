@@ -20,20 +20,19 @@ public class Solution {
                 BufferedReader bufferedReader = new BufferedReader(read);
                 String lineText = null;
                 while ((lineText = bufferedReader.readLine()) != null) {
-                    System.out.println(lineText);
                     String[] input = lineText.split("\\s+");
                     StringBuilder res = new StringBuilder();
                     sa.addSeats(Integer.parseInt(input[1]), res);
+                    res.setLength(res.length() == 0? 0 : res.length() - 1);
                     writer.print(input[0] + " ");
                     writer.println(res.toString());
                 }
                 writer.close();
-                System.out.println("Accomplished!");
+                System.out.println("The output file path is: " + outputFilePath);
             } else {
                 System.out.println("Invalid input file name");
             }
         } catch (Exception e) {
-            System.out.println("Fail to read file");
             e.printStackTrace();
         }
 
