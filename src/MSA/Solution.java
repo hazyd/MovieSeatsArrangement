@@ -11,7 +11,7 @@ public class Solution {
     public static void main(String[] args) {
         SeatsAssigning sa = new SeatsAssigning(10, 20);
         try {
-            String inputFilePath = "/Users/hazyd/Desktop/testInput";
+            String inputFilePath = args[0];
             String outputFilePath = "/Users/hazyd/Desktop/testOutput";
             PrintWriter writer = new PrintWriter(outputFilePath, "UTF-8");
             File file = new File(inputFilePath);
@@ -23,6 +23,7 @@ public class Solution {
                     String[] input = lineText.split("\\s+");
                     StringBuilder res = new StringBuilder();
                     sa.addSeats(Integer.parseInt(input[1]), res);
+                    res.setLength(res.length() - 1);
                     writer.print(input[0] + " ");
                     writer.println(res.toString());
                 }
