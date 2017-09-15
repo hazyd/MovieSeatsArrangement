@@ -23,7 +23,6 @@ public class Solution {
                     String[] input = lineText.split("\\s+");
                     StringBuilder res = new StringBuilder();
                     sa.addSeats(Integer.parseInt(input[1]), res);
-                    res.setLength(res.length() == 0? 0 : res.length() - 1);
                     writer.print(input[0] + " ");
                     writer.println(res.toString());
                 }
@@ -35,7 +34,7 @@ public class Solution {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        //sa.printA();
         sa.printSeats();
     }
 }
